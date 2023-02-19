@@ -1,7 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
-import Background from "./components/Background";
 //import { useEffect } from "react";
 //import { FaQuestion } from "react-icons/fa";
 //import { number } from "zod";
@@ -13,6 +12,7 @@ import Background from "./components/Background";
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({ text: "from tRPC" });
   const lastElement = React.createRef<HTMLDivElement>();
+  const topElement = React.createRef<HTMLDivElement>();
   const [imaginary, setImaginary] = useState<number>(1);
   const [height, setHeight] = useState(null);
   useEffect(() => {
@@ -42,20 +42,45 @@ const Home: NextPage = () => {
           }}
           className=" relative my-8 w-11/12  gap-12 overflow-hidden rounded-xl bg-gray-900 py-4 px-4  text-white opacity-80"
         >
-          <div className="absolute bottom-0 right-0 z-10 h-10 w-28 content-center items-center justify-center rounded-tl-lg bg-gray-900">
+          <div
+            className={
+              "absolute bottom-0 right-0 z-10 h-10 w-28 content-center items-center justify-center rounded-tl-lg bg-gray-900"
+            }
+          >
             <button
               onClick={() => {
                 lastElement.current?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="py-1 px-2"
+              className={"py-1 px-2"}
             >
               Scroll Down
             </button>
           </div>
-          <div className="  h-full w-full self-center overflow-y-auto rounded-lg bg-gray-800 p-4 scrollbar-hide">
-            <div className="absolute z-10 h-10 w-28 rounded-xl  rounded-tl-lg  bg-gray-900 object-center align-middle opacity-70 ">
-              <p className=" ">File name</p>
+          <div
+            className={
+              "absolute flex h-8 w-full items-center justify-center  align-middle "
+            }
+          >
+            <div className={"h-full w-28  rounded-b-lg bg-gray-700 opacity-70"}>
+              <p className={"z-10 text-center text-lg text-white"}>
+                ⚛️Index.ts
+              </p>
             </div>
+            <div className={"absolute right-8 top-0"}>
+              <button
+                onClick={() => {}}
+                className={`h-8 rounded-bl-lg rounded-tr-lg bg-green-500 px-4 py-1 text-white`}
+              >
+                Finish !
+              </button>
+            </div>
+          </div>
+
+          <div
+            className={
+              "  h-full w-full self-center overflow-y-auto rounded-lg bg-gray-800 p-4 scrollbar-hide"
+            }
+          >
             <button
               onClick={() => {
                 setImaginary(imaginary + 1);
