@@ -1,11 +1,15 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
+import Editor from "../components/editor/CodeMirror";
 import BasicButton from "./components/Button";
+import { Avatar, Dropdown } from "@nextui-org/react";
+import ListBoxItem from "../components/editor/ListBoxItem";
 
 const Home: NextPage = () => {
   const lastElement = React.createRef<HTMLDivElement>();
   const [height, setHeight] = useState(null);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setHeight(window.innerHeight);
@@ -19,11 +23,18 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-[#100F5B] to-[#155A73] py-5">
+        <div className="absolute top-3 right-14 flex h-14 w-28 flex-row items-center justify-evenly rounded-lg bg-transparent backdrop-blur-3xl">
+          <Avatar
+            className="h-10"
+            squared
+            src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+          />
+
+          <p className="text-white">Wewe</p>
+        </div>
         <div className="container flex flex-col items-center justify-start gap-12 rounded-xl  px-4">
           <h1 className="text-xl tracking-tight text-white sm:text-[3rem]">
-            DON'T{" "}
-            <span className="font-bold text-[hsl(280,100%,70%)]">RUSH</span> IT
-            !
+            DON'T <span className="font-bold text-sky-400 ">RUSH</span> IT !
           </h1>
         </div>
 
@@ -31,18 +42,24 @@ const Home: NextPage = () => {
           style={{
             height: height * 0.79,
           }}
-          className=" relative my-8 w-11/12  gap-12 overflow-hidden rounded-xl bg-gray-900 py-4 px-4  text-white opacity-80"
+          className=" relative my-8 w-11/12  gap-12 overflow-hidden rounded-xl bg-gray-800 py-4 px-0  text-white opacity-80"
         >
           <div
             className={
               "absolute flex h-8 w-full items-center justify-center  align-middle "
             }
           >
-            <div className={"h-full w-28  rounded-b-lg bg-gray-700 opacity-70"}>
-              <p className={"z-20 text-center text-lg text-white"}>
-                ⚛️Index.ts
-              </p>
+            <ListBoxItem />
+            {/*
+            <div className={"h-full w-40  rounded-lg bg-gray-700/25"}>
+
+                <p className={"z-20 text-center text-lg text-white"}> ⚛️Index.ts
+                </p>
+              */}
+
+            {/*
             </div>
+
             <div className={"absolute right-8 top-0"}>
               <button
                 onClick={() => {}}
@@ -51,40 +68,18 @@ const Home: NextPage = () => {
                 Finish !
               </button>
             </div>
+            */}
           </div>
 
           <div
             className={
-              "  zen-10 h-full w-full self-center overflow-y-auto rounded-lg bg-gray-800 p-4 scrollbar-hide"
+              "  zen-10  h-full w-full self-center overflow-hidden rounded-lg bg-gray-800/25 px-4 py-9 scrollbar-hide"
             }
           >
-            {/*
-            <CodeMirror
-              value="console.log('hello world!');"
-              theme={myTheme}
-              extensions={[javascript({ jsx: true })]}
-              onChange={onChange}
-              maxWidth={(window.innerWidth * 0.5).toString()}
-              style={{
-                outline: "none",
-                border: "none",
-                margin: 0,
-                padding: 0,
-                borderRadius: 0,
-                borderColor: "transparent",
-              }}
-              basicSetup={{
-                foldGutter: true,
-                highlightActiveLineGutter: false,
-                lineNumbers: true,
-                indentOnInput: true,
-              }}
-            />
-            */}
-            <div ref={lastElement}></div>
+            <Editor />
           </div>
         </div>
-        <footer className=" relative bottom-5 flex w-full flex-row justify-evenly">
+        <footer className=" relative bottom-6 flex w-full flex-row justify-evenly">
           <BasicButton
             text="Give up :("
             onClick={() => {}}
@@ -93,7 +88,8 @@ const Home: NextPage = () => {
           <BasicButton
             text="Finish !"
             onClick={() => {}}
-            tailwindProps="bg-green-900 rounded-md"
+            //disabled={true}
+            tailwindProps="bg-green-800 rounded-md"
           />
         </footer>
       </main>
