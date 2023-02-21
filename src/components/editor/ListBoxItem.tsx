@@ -17,6 +17,7 @@ export default function ListBoxItem() {
           borderRadius: 5,
           backgroundColor: "#7EC5BB",
           height: 35,
+          color: "FloralWhite",
         }}
       >
         {selectedValue}

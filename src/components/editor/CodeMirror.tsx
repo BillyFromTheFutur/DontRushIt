@@ -4,6 +4,32 @@ import { javascript } from "@codemirror/lang-javascript";
 import { tags as t } from "@lezer/highlight";
 import React, { useState, useEffect } from "react";
 
+const defaultValue = `import React from "react";
+import Display from "./Display";
+import ButtonPanel from "./ButtonPanel";
+import calculate from "../logic/calculate";
+import "./App.css";
+
+export default class App extends React.Component {
+  state = {
+    total: null,
+    next: null,
+    operation: null,
+  };
+
+  handleClick = buttonName => {
+    this.setState(calculate(this.state, buttonName));
+  };
+
+  render() {
+    return (
+      <div className="component-app">
+        <Display value={this.state.next || this.state.total || "0"} />
+        <ButtonPanel clickHandler={this.handleClick} />
+      </div>
+    );
+  }
+};`;
 const myTheme = createTheme({
   theme: "dark",
   settings: {
@@ -45,14 +71,18 @@ const Editor: React.FC<Props> = () => {
       setHeight(window.innerHeight);
     }
   }, []);
+  const [timerFinished, setTimerFinished] = useState<boolean>(false);
+
   return (
     <CodeMirror
-      value=""
+      value={defaultValue}
       theme={myTheme}
       extensions={[javascript({ jsx: true })]}
       onChange={() => {
         console.log("fgh");
       }}
+      //https://go.360koralive.com/2023/02/the-date-of-friendly-match-number-78.html
+      readOnly={timerFinished}
       //minHeight={(height * 0.68).toString() + "px"}
       //maxHeight={(height * 0.68).toString() + "px"}
       maxWidth={(height * 0.6).toString()}
@@ -78,6 +108,9 @@ const Editor: React.FC<Props> = () => {
         highlightActiveLineGutter: false,
         lineNumbers: true,
         indentOnInput: true,
+      }}
+      onEnded={() => {
+        console.log("OUI");
       }}
     />
   );
