@@ -65,10 +65,13 @@ interface Props {
   props?: any;
 }
 const Editor: React.FC<Props> = () => {
-  const [height, setHeight] = useState(null);
+  const [height, setHeight] = useState<number | null>(null);
+  const [width, setWidth] = useState<number | null>(null);
   useEffect(() => {
     if (typeof window !== "undefined") {
       setHeight(window.innerHeight);
+
+      setWidth(window.innerWidth);
     }
   }, []);
   const [timerFinished, setTimerFinished] = useState<boolean>(false);
@@ -85,9 +88,12 @@ const Editor: React.FC<Props> = () => {
       readOnly={timerFinished}
       //minHeight={(height * 0.68).toString() + "px"}
       //maxHeight={(height * 0.68).toString() + "px"}
-      maxWidth={(height * 0.6).toString()}
-      minWidth={(height * 0.6).toString()}
-      height={(height * 0.68).toString() + "px"}
+      //maxWidth={(height * 0.6).toString()}
+      //minWidth={(height * 0.6).toString()}
+      height={"95%"}
+      //     width={(width * 0.89).toString() + "px"}
+
+      width={"100%"}
       style={{
         outline: "none",
         // border: "solid 2px black",

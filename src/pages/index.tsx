@@ -38,32 +38,31 @@ const Home: NextPage = () => {
           style={{
             height: height * 0.85,
           }}
-          className="relative my-0 h-full w-11/12 gap-12 overflow-hidden rounded-xl bg-transparent bg-opacity-30 py-4 pt-5 text-white  "
+          className="relative mt-5 flex h-full w-11/12 justify-center gap-12 overflow-hidden rounded-xl bg-gray-900 bg-transparent bg-opacity-30 shadow-xl scrollbar-hide"
         >
           <div
             className={
-              "zen-10 h-full w-full self-center overflow-hidden rounded-xl  bg-gray-900 bg-opacity-30 px-4 py-9 shadow-lg  scrollbar-hide "
+              " absolute z-10 flex h-9 w-full  items-center justify-center   backdrop-blur-sm "
             }
           >
-            <div
-              className={
-                "absolute z-20 flex h-auto w-full items-center justify-center bg-gradient-to-br from-blue-500/0  to-pink-500/5 align-middle backdrop-blur-sm "
-              }
-            >
-              <ListBoxItem />
-            </div>
+            <ListBoxItem />
+          </div>
+          <div className="relative h-auto w-full overflow-y-auto px-5 scrollbar-hide">
+            <div className="z-10 h-9 w-full bg-transparent"></div>
             <Editor />
+
+            <div className="z-10 h-5 w-full bg-transparent"></div>
           </div>
         </div>
-        <footer className=" relative bottom-0 flex w-full flex-row justify-evenly">
+        <footer className=" relative top-3  flex w-full flex-row justify-evenly">
           <BasicButton
             text="Give up :("
-            onClick={() => {}}
+            onClick={() => { }}
             tailwindProps="bg-pink-800 rounded-md"
           />
           <BasicButton
             text="Finish !"
-            onClick={() => {}}
+            onClick={() => { }}
             //disabled={true}
             size={"medium"}
             tailwindProps="bg-green-800 rounded-md"
