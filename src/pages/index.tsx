@@ -38,17 +38,17 @@ const Home: NextPage = () => {
           style={{
             height: height * 0.85,
           }}
-          className="relative mt-5 flex h-full w-11/12 justify-center gap-12 overflow-hidden rounded-xl bg-gray-900 bg-transparent bg-opacity-30 shadow-xl scrollbar-hide"
+          className="relative mt-5 flex h-full w-11/12 justify-center gap-12 overflow-hidden rounded-xl bg-black bg-opacity-30 shadow-xl scrollbar-hide"
         >
           <div
             className={
-              " absolute z-10 flex h-9 w-full  items-center justify-center   backdrop-blur-sm "
+              " absolute z-10  flex h-11 w-full items-center justify-center bg-black/5 backdrop-blur-sm "
             }
           >
             <ListBoxItem />
           </div>
           <div className="relative h-auto w-full overflow-y-auto px-5 scrollbar-hide">
-            <div className="z-10 h-9 w-full bg-transparent"></div>
+            <div className="z-10 h-11  w-full bg-transparent"></div>
             <Editor />
 
             <div className="z-10 h-5 w-full bg-transparent"></div>
@@ -57,12 +57,12 @@ const Home: NextPage = () => {
         <footer className=" relative top-3  flex w-full flex-row justify-evenly">
           <BasicButton
             text="Give up :("
-            onClick={() => { }}
+            onClick={() => {}}
             tailwindProps="bg-pink-800 rounded-md"
           />
           <BasicButton
             text="Finish !"
-            onClick={() => { }}
+            onClick={() => {}}
             //disabled={true}
             size={"medium"}
             tailwindProps="bg-green-800 rounded-md"
