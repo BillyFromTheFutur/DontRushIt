@@ -3,12 +3,15 @@ import Head from "next/head";
 import React, { useState, useEffect, useCallback } from "react";
 import Editor from "../components/editor/CodeMirror";
 import BasicButton from "./components/Button";
-import { Avatar, Dropdown } from "@nextui-org/react";
 import ListBoxItem from "../components/editor/ListBoxItem";
 import UserMenu from "./components/UserMenu";
 import { ArrowButton } from "../components/arrowButton";
+import { api } from "../utils/api";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
+  const result = api.example.hello.useQuery({ text: "yes bebe" });
+
   const lastElement = React.createRef<HTMLDivElement>();
   const firstElement = React.createRef<HTMLDivElement>();
   const [height, setHeight] = useState(null);
@@ -17,13 +20,11 @@ const Home: NextPage = () => {
       setHeight(window.innerHeight);
     }
   }, []);
+  const keyMap = {
+    MOVE_UP: "alt+t",
+    MOVE_DOWN: "alt+b",
+  };
 
-  const handleKeyPress = useCallback((event) => {
-    // check if the Shift key is pressed
-    if (event.shiftKey === true) {
-      console.log(`Key pressed: ${event.key}`);
-    }
-  }, []);
   return (
     <div className=" min-h-screen overflow-hidden bg-gray-100">
       <Head>
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
         <div className="container flex flex-col items-center justify-start gap-12 rounded-xl  px-4">
           <h1 className="text-xl tracking-tight text-white sm:text-[3rem]">
             DON'T <span className="font-bold text-sky-400 ">RUSH</span> IT !
+            {result.data?.greeting}
           </h1>
         </div>
         <div
@@ -88,6 +90,7 @@ const Home: NextPage = () => {
             size={"medium"}
             tailwindProps="bg-green-800 rounded-md"
           />
+          <AuthShowcase />
         </footer>
       </main>
     </div>
@@ -95,3 +98,28 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+const AuthShowcase: React.FC = () => {
+  const { data: sessionData } = useSession();
+
+  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
+    undefined, // no input
+    { enabled: sessionData?.user !== undefined }
+  );
+
+  return (
+    <div className="flex flex-col items-center justify-center gap-4">
+      <p className="text-center text-2xl text-white">
+        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
+        {sessionData && <span>it is what it is {sessionData.user.image}</span>}
+        {secretMessage && <span> - {secretMessage}</span>}
+      </p>
+      <button
+        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+        onClick={sessionData ? () => void signOut() : () => void signIn()}
+      >
+        {sessionData ? "Sign out" : "Sign in"}
+      </button>
+    </div>
+  );
+};
