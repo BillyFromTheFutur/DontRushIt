@@ -7,6 +7,7 @@ interface Props {
   disabled?: boolean;
   onClick: () => void;
   position?: string;
+  children?: unknown;
 }
 type SizeClasses = {
   small: string;
@@ -20,6 +21,7 @@ const BasicButton: React.FC<Props> = ({
   disabled = false,
   onClick,
   position = "",
+  children,
 }) => {
   const sizes: SizeClasses = {
     small: "py-1 px-3 text-xs",
@@ -38,6 +40,7 @@ const BasicButton: React.FC<Props> = ({
         disabled={disabled}
       >
         {text}
+        {children}
       </button>
     </div>
   );

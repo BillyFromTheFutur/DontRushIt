@@ -1,19 +1,27 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Editor from "../components/editor/CodeMirror";
 import BasicButton from "./components/Button";
 import { Avatar, Dropdown } from "@nextui-org/react";
 import ListBoxItem from "../components/editor/ListBoxItem";
 import UserMenu from "./components/UserMenu";
+import { ArrowButton } from "../components/arrowButton";
 
 const Home: NextPage = () => {
   const lastElement = React.createRef<HTMLDivElement>();
+  const firstElement = React.createRef<HTMLDivElement>();
   const [height, setHeight] = useState(null);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       setHeight(window.innerHeight);
+    }
+  }, []);
+
+  const handleKeyPress = useCallback((event) => {
+    // check if the Shift key is pressed
+    if (event.shiftKey === true) {
+      console.log(`Key pressed: ${event.key}`);
     }
   }, []);
   return (
@@ -33,25 +41,38 @@ const Home: NextPage = () => {
             DON'T <span className="font-bold text-sky-400 ">RUSH</span> IT !
           </h1>
         </div>
-
         <div
           style={{
             height: height * 0.85,
           }}
           className="relative mt-5 flex h-full w-11/12 justify-center gap-12 overflow-hidden rounded-xl bg-black bg-opacity-30 shadow-xl scrollbar-hide"
         >
+          <ArrowButton
+            arrowDown={() => {
+              firstElement.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+            arrowTop={() => {
+              lastElement.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          />
+
           <div
             className={
-              " absolute z-10  flex h-11 w-full items-center justify-center bg-black/5 backdrop-blur-sm "
+              " absolute z-10 flex h-11 w-full items-center justify-center bg-gradient-to-t from-black/0 to-black/20 backdrop-blur-sm"
             }
           >
             <ListBoxItem />
           </div>
           <div className="relative h-auto w-full overflow-y-auto px-5 scrollbar-hide">
-            <div className="z-10 h-11  w-full bg-transparent"></div>
+            <div
+              ref={firstElement}
+              className="z-10 h-11  w-full bg-transparent"
+            ></div>
             <Editor />
-
-            <div className="z-10 h-5 w-full bg-transparent"></div>
+            <div
+              ref={lastElement}
+              className="z-10 h-5 w-full bg-transparent"
+            ></div>
           </div>
         </div>
         <footer className=" relative top-3  flex w-full flex-row justify-evenly">
