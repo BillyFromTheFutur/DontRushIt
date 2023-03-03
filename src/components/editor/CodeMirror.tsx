@@ -1,35 +1,13 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { createTheme } from "@uiw/codemirror-themes";
 import { javascript } from "@codemirror/lang-javascript";
+import { java } from "@codemirror/lang-java";
 import { tags as t } from "@lezer/highlight";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { defaultJavaScriptReact } from "./value/javascriptreact";
+import { defaultJava } from "./value/java";
+import { language, StreamLanguage } from "@codemirror/language";
 
-const defaultValue = `import React from "react";
-import Display from "./Display";
-import ButtonPanel from "./ButtonPanel";
-import calculate from "../logic/calculate";
-import "./App.css";
-
-export default class App extends React.Component {
-  state = {
-    total: null,
-    next: null,
-    operation: null,
-  };
-
-  handleClick = buttonName => {
-    this.setState(calculate(this.state, buttonName));
-  };
-
-  render() {
-    return (
-      <div className="component-app">
-        <Display value={this.state.next || this.state.total || "0"} />
-        <ButtonPanel clickHandler={this.handleClick} />
-      </div>
-    );
-  }
-};`;
 const myTheme = createTheme({
   theme: "dark",
   settings: {
@@ -41,7 +19,7 @@ const myTheme = createTheme({
     lineHighlight: "#8a91991a",
     gutterBackground: "transparent",
     gutterForeground: "#7EC5BB",
-    //00FFAC
+    //#00FFAC
   },
   styles: [
     { tag: t.comment, color: "#5EB45C", fontStyle: "italic" },
@@ -62,61 +40,35 @@ const myTheme = createTheme({
 });
 
 interface Props {
-  props?: any;
+  props?: unknown;
 }
 const Editor: React.FC<Props> = () => {
-  const [height, setHeight] = useState<number | null>(null);
-  const [width, setWidth] = useState<number | null>(null);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setHeight(window.innerHeight);
-
-      setWidth(window.innerWidth);
-    }
-  }, []);
   const [timerFinished, setTimerFinished] = useState<boolean>(false);
 
   return (
     <CodeMirror
-      value={defaultValue}
+      value={defaultJava}
       theme={myTheme}
-      extensions={[javascript({ jsx: true })]}
+      extensions={[javascript({ jsx: true }), java()]}
       onChange={() => {
         console.log("fgh");
       }}
-      //https://go.360koralive.com/2023/02/the-date-of-friendly-match-number-78.html
       readOnly={timerFinished}
-      //minHeight={(height * 0.68).toString() + "px"}
-      //maxHeight={(height * 0.68).toString() + "px"}
-      //maxWidth={(height * 0.6).toString()}
-      //minWidth={(height * 0.6).toString()}
       height={"95%"}
-      //     width={(width * 0.89).toString() + "px"}
-
       width={"100%"}
       style={{
         outline: "none",
-        // border: "solid 2px black",
-        //borderTop: "solid 2px black",
         scrollbarWidth: "none",
         scrollbarColor: "black",
         margin: 0,
         padding: 0,
         borderRadius: 10,
-        //overflow: "hidden",
-        //overflowX: "auto",
-        //overflowY: "hidden",
-        //borderColor: "transparent",
-        //columnWidth: 100,
       }}
       basicSetup={{
         foldGutter: true,
         highlightActiveLineGutter: false,
         lineNumbers: true,
         indentOnInput: true,
-      }}
-      onEnded={() => {
-        console.log("OUI");
       }}
     />
   );

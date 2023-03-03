@@ -8,6 +8,7 @@ import UserMenu from "./components/UserMenu";
 import { ArrowButton } from "../components/arrowButton";
 import { api } from "../utils/api";
 import { signIn, signOut, useSession } from "next-auth/react";
+
 //import { useBearStore } from "./store/user";
 
 const Home: NextPage = () => {
@@ -53,7 +54,7 @@ const Home: NextPage = () => {
                 }
               : {}
           }
-          className="relative mt-5 flex h-full w-11/12 justify-center gap-12 overflow-hidden rounded-xl bg-black bg-opacity-30 shadow-xl scrollbar-hide"
+          className="relative mt-5 flex h-full w-11/12 justify-center gap-12 overflow-hidden rounded-xl bg-black bg-opacity-20 shadow-xl scrollbar-hide"
         >
           <ArrowButton
             arrowDown={() => {
@@ -66,7 +67,7 @@ const Home: NextPage = () => {
 
           <div
             className={
-              " absolute z-10 flex h-11 w-full items-center justify-center bg-gradient-to-t from-black/0 to-black/20 backdrop-blur-sm"
+              " absolute z-10 flex h-11 w-full items-center justify-center bg-black/5 backdrop-blur-sm"
             }
           >
             <ListBoxItem />
