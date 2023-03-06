@@ -1,10 +1,14 @@
 import { Avatar } from "@nextui-org/react";
-import React from "react";
+import React, { useState } from "react";
 
 const UserMenu = () => {
   return (
-    <button>
-      <div className="absolute top-3 right-14 flex h-14 w-36 flex-row items-center justify-evenly rounded-lg bg-white/5 backdrop-blur-lg transition  delay-150 duration-300 ease-in-out hover:scale-105 hover:bg-white/20">
+    <button
+      onClick={() => {
+        console.log("yes bebe");
+      }}
+    >
+      <div className="absolute top-3 right-3 flex h-14 w-36 flex-row items-center justify-evenly rounded-md bg-white/5 shadow-xl backdrop-blur-lg transition delay-150 duration-300 ease-in-out hover:scale-105 hover:bg-white/20">
         <Avatar
           className="h-10"
           squared
@@ -16,4 +20,5 @@ const UserMenu = () => {
     </button>
   );
 };
+
 export default UserMenu;

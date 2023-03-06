@@ -1,4 +1,4 @@
-export const defaultJava = ` import java.util.Scanner;
+export const defaultJava = `import java.util.Scanner;
 
 public class HelloWorld {
 

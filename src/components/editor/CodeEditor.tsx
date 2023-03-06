@@ -4,9 +4,7 @@ import { javascript } from "@codemirror/lang-javascript";
 import { java } from "@codemirror/lang-java";
 import { tags as t } from "@lezer/highlight";
 import React, { useState } from "react";
-import { defaultJavaScriptReact } from "./value/javascriptreact";
-import { defaultJava } from "./value/java";
-import { language, StreamLanguage } from "@codemirror/language";
+import { useLangStore } from "../../pages/store/languagechoose";
 
 const myTheme = createTheme({
   theme: "dark",
@@ -43,17 +41,26 @@ interface Props {
   props?: unknown;
 }
 const Editor: React.FC<Props> = () => {
-  const [timerFinished, setTimerFinished] = useState<boolean>(false);
+  //const [timerFinished, setTimerFinished] = useState<boolean>(false);
+  const { language } = useLangStore();
+  const [content, setContent] = useState<string>("");
 
   return (
     <CodeMirror
-      value={defaultJava}
+      value={language}
       theme={myTheme}
       extensions={[javascript({ jsx: true }), java()]}
-      onChange={() => {
-        console.log("fgh");
+      onChange={(value) => {
+        // Handle changes to the editor content
+        setContent(value);
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        console.log(value);
+        console.log("????????????????????????????????????????????????????????");
       }}
-      readOnly={timerFinished}
+      onEnded={() => {
+        console.log("KAMETO");
+      }}
+      //readOnly={timerFinished}
       height={"95%"}
       width={"100%"}
       style={{
