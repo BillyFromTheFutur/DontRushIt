@@ -12,16 +12,31 @@ const Topics: NextPage = () => {
   }, []);
 
   return (
-    <div className=" max-h-screen overflow-hidden bg-gray-100">
-      <main className="flex max-h-screen min-h-screen flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-[#100F5B] to-[#155A73] py-5">
+    <div className="max-h-screen  bg-gray-100">
+      <main className="flex max-h-screen min-h-screen flex-col items-center justify-start  bg-gradient-to-b from-[#100F5B] to-[#155A73] py-5">
         <div
-          className="  rounded-lg bg-gradient-to-b from-black/30 to-gray-800/40  shadow-md"
-          style={{ minWidth: width! * 0.75, minHeight: height! * 0.9 }}
+          className="inline-grid grid-cols-5 gap-2 rounded-lg bg-gradient-to-b from-black/30 to-gray-800/40 p-2 shadow-md"
+          style={{
+            minWidth: width! * 0.75,
+            height: height! * 0.9,
+          }}
         >
-          <p>ikuzo</p>
+          <div className="col-span-1 rounded-md bg-gray-500/90 px-2 shadow-sm transition delay-150 duration-300 hover:scale-101 hover:bg-gray-500 hover:shadow-xl">
+            <p>yes</p>
+          </div>
+
+          <div className="col-span-4 flex justify-center overflow-hidden">
+            <div className="flex w-full flex-col items-center gap-2 overflow-y-scroll rounded-md bg-yellow-500 p-2 shadow-sm scrollbar-hide">
+              <div className="h-96 w-96 bg-black"></div>
+              <div className=" h-96 w-56 bg-red-300"></div>
+              <div className="h-96 w-56 bg-green-300"></div>
+              <div className="h-96 w-56 bg-blue-300"></div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
   );
 };
+
 export default Topics;

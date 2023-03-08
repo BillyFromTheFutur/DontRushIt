@@ -16,7 +16,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <NextUIProvider>
       <SessionProvider session={session}>
-        <div className=" max-h-screen overflow-hidden">
+        <div className=" max-h-screen ">
           <Head>
             <title>Don&apos;t rush it !</title>
             <meta
@@ -25,7 +25,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <main className="flex max-h-screen flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-[#100F5B] to-[#155A73] py-5">
+          <main className="flex max-h-screen flex-col items-center justify-start  bg-gradient-to-b from-[#100F5B] to-[#155A73] py-5">
             <NavBar />
             <Component {...pageProps} />
           </main>
