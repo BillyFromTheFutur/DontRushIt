@@ -13,7 +13,7 @@ const Topics: NextPage = () => {
 
   return (
     <div className="max-h-screen  bg-gray-100">
-      <main className="flex max-h-screen min-h-screen flex-col items-center justify-start  bg-gradient-to-b from-[#100F5B] to-[#155A73] py-5">
+      <main className="flex max-h-screen  flex-col items-center justify-start  bg-gradient-to-b from-[#100F5B] to-[#155A73] py-5">
         <div
           className="inline-grid grid-cols-5 gap-2 rounded-lg bg-gradient-to-b from-black/30 to-gray-800/40 p-2 shadow-md"
           style={{
@@ -25,9 +25,9 @@ const Topics: NextPage = () => {
             <p>yes</p>
           </div>
 
-          <div className="col-span-4 flex justify-center overflow-hidden">
-            <div className="flex w-full flex-col items-center gap-2 overflow-y-scroll rounded-md bg-yellow-500 p-2 shadow-sm scrollbar-hide">
-              <div className="h-96 w-96 bg-black"></div>
+          <div className="col-span-4 overflow-auto rounded-md scrollbar-hide">
+            <div className="flex w-full flex-col items-center gap-2 bg-yellow-500 p-2 shadow-sm ">
+              <div className="h-96 w-4/5 bg-black"></div>
               <div className=" h-96 w-56 bg-red-300"></div>
               <div className="h-96 w-56 bg-green-300"></div>
               <div className="h-96 w-56 bg-blue-300"></div>
